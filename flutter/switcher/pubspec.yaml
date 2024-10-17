@@ -36,6 +36,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
+  # Realm and Ditto dependencies
+  realm: ^20.0.0
+  ditto_live: ^4.8.0-publicpreview.1
+  permission_handler: ^10.0.0
+  path_provider: ^2.0.11
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

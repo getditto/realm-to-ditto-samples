@@ -11,7 +11,7 @@ class Item {
     return Item(
       id: item.value['_id'],
       detail: item.value['detail'],
-      subitems: item.value['subitems'].values.cast<String>().toList(),
+      subitems: List<String>.from(item.value['subitems']),
     );
   }
 
@@ -20,7 +20,7 @@ class Item {
     return {
       '_id': id, // Ditto Document ID requires the underscore prefix (`_`).
       'detail': detail,
-      'subitems': {for (var subitem in subitems) subitem: subitem},
+      'subitems': subitems,
     };
   }
 }

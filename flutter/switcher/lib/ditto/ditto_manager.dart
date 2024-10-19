@@ -48,12 +48,12 @@ class DittoManager {
   }
 
   _subscribe() {
-    final query = "SELECT * FROM COLLECTION $collectionName (subitems MAP)";
+    final query = "SELECT * FROM COLLECTION $collectionName";
     ditto.sync.registerSubscription(query);
   }
 
   Stream<List<Item>> watchItems() {
-    final query = "SELECT * FROM COLLECTION $collectionName (subitems MAP)";
+    final query = "SELECT * FROM COLLECTION $collectionName";
     return Stream.fromFuture(ditto.store.registerObserver(query)).asyncExpand((observer) {
       storeObserver?.cancel();
       storeObserver = observer;
@@ -66,7 +66,7 @@ class DittoManager {
 
   addItem(Item item) {
     final query = """
-      INSERT INTO COLLECTION $collectionName (subitems MAP)
+      INSERT INTO COLLECTION $collectionName
       DOCUMENTS (:newItem)
       ON ID CONFLICT DO UPDATE
     """;

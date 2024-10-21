@@ -38,8 +38,8 @@ class MyHomePageState extends State<MyHomePage> {
   //// ⚠️ Toggle this value to switch between Realm and Ditto.
   bool isRealm = true;
 
-  late RealmManager _realmManager;
-  late DittoManager _dittoManager;
+  final RealmManager _realmManager = RealmManager();
+  final DittoManager _dittoManager = DittoManager();
   List<Item> items = [];
   StreamSubscription? _realmSubscription;
   StreamSubscription? _dittoSubscription;
@@ -47,16 +47,13 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _realmManager = RealmManager();
-    _dittoManager = DittoManager();
-    _loadItems();
+    _watchItems();
   }
 
   void _loadItems() {
     setState(() {
       items = isRealm ? _realmManager.getAllItems() : _dittoManager.items;
     });
-    _watchItems();
   }
 
   void _watchItems() {
@@ -104,7 +101,7 @@ class MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     isRealm = true;
                   });
-                  _loadItems();
+                  _watchItems();
                   Navigator.of(context).pop();
                 },
               ),
@@ -114,7 +111,7 @@ class MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     isRealm = false;
                   });
-                  _loadItems();
+                  _watchItems();
                   Navigator.of(context).pop();
                 },
               ),
